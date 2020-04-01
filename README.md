@@ -32,6 +32,6 @@ Pull requests are more than welcome !
 
 ## Result
 
-![alt tag](https://i.imgur.com/PEpEei2.png)
+![alt tag](https://i.imgur.com/MCiCg3X.png)
 
 ![alt tag](https://i.imgur.com/0yT44yu.png)
