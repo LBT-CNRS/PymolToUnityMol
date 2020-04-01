@@ -2,6 +2,11 @@
 
 Convert pymol session file (.pse) to UnityMol commands
 
+## Requirements
+
+- Python 2.x
+- Pymol python library
+
 ## How to run
 
 ```bash
