@@ -2,9 +2,9 @@
 # coding: utf-8
 
 #-------------------------------------------------------------
-Apache 2.0 licence, see LICENCE file
-Authors: Amélys DEBIOL & Xavier MARTINEZ
-Date: 26/07/2019
+# Apache 2.0 licence, see LICENCE file
+# Authors: Amélys DEBIOL & Xavier MARTINEZ
+# Date: 26/07/2019
 #-------------------------------------------------------------
 
 #Runs on Python 2.x because of the pymol library
