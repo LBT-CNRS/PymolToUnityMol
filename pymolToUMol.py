@@ -29,8 +29,9 @@ def isfile(path):
         raise argparse.ArgumentTypeError(msg)
     return path
 
-def pymolToUnityMol(psefile, pymolColors):
-    pse=pickle.load(open(psefile, 'rb')) # binaire -> ascii
+def pymolToUnityMol(psefile, pymolColors, umolfile):
+    with open(psefile, 'rb') as f:
+        pse=pickle.load(f)
     name=pse['names'] # names est la clé qui contient la liste des molécules/sélection ainsi que leurs pptés
     matchingRepre={"sticks":"Balls&Sticks","spheres":"VdW","surface":"s","label":"","nb_spheres":"","cartoon":"c","ribbon":"c","lines":"l","mesh":"wireframe","dots":"s","nonbonded":"hbond","cell":"", "licorice":"Licorice","wire":"l"}
     nbSele=0 # n° des sélections par représentation
@@ -38,7 +39,7 @@ def pymolToUnityMol(psefile, pymolColors):
     cols = "" #liste des couleurs de chaque sélection par représentation
     sele=[] #liste des atomid des sélections du .pse
     stock=[] #permet d'afficher les sélections à la fin
-    printNameMol(psefile) # fetch toutes les molécules 
+    printNameMol(pse) # fetch toutes les molécules 
 
     for molecule in name: # molecule peut être une molecule ou une selection
         if molecule!=name[0] and molecule!=[]: #name[0]==None []== sélection vide
@@ -78,7 +79,7 @@ def pymolToUnityMol(psefile, pymolColors):
 
             if  molecule[5]!= [] and type(molecule[5][0][0])==str: #sélection
                 for l in range(len(molecule[5])):
-                    dicAtom=numberToAtomid(psefile, molecule[5][l][0]) #clé == number; value == atomid , toutes les correspondances de la molécules
+                    dicAtom=numberToAtomid(pse, molecule[5][l][0]) #clé == number; value == atomid , toutes les correspondances de la molécules
                     for m in molecule[5][l][1]:  
                         sele.append(dicAtom[m])
                     sele.sort()
@@ -92,8 +93,7 @@ def pymolToUnityMol(psefile, pymolColors):
         print("select('"+m+"')")
     print("clearSelections()")
 
-def printNameMol(psefile): #affiche toutes les molécules présentes dans le fichier
-    pse=pickle.load(open(psefile, 'rb')) 
+def printNameMol(pse): #affiche toutes les molécules présentes dans le fichier
     name=pse['names'] 
     for mol in name: 
         if mol!=name[0] and mol!=[]: 
@@ -165,8 +165,7 @@ def representation(repreNumber): #renvoie la liste des représentation par atome
 def bits(repreNumber) : #renvoie la représentation de l'atome en binaire    
     return "{0:b}".format(int(repreNumber))
 
-def numberToAtomid(psefile, mol): #fonction utile pour les sélections
-    pse=pickle.load(open(psefile, 'rb')) 
+def numberToAtomid(pse, mol): #fonction utile pour les sélections
     name=pse['names'] 
     dicAtom={}
     for molecule in name:
@@ -2057,4 +2056,4 @@ if __name__ == "__main__":
     args = define_options(sys.argv[1:])
 
     pymolColors=dicColor()
-    pymolToUnityMol(args.filin, pymolColors)
+    pymolToUnityMol(args.filin, pymolColors, args.filout)
