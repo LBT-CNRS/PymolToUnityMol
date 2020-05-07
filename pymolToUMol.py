@@ -39,7 +39,10 @@ def pymolToUnityMol(psefile, pymolColors, umolfile):
     cols = "" #liste des couleurs de chaque sélection par représentation
     sele=[] #liste des atomid des sélections du .pse
     stock=[] #permet d'afficher les sélections à la fin
-    printNameMol(pse) # fetch toutes les molécules 
+
+    f_out = open(umolfile, "w")
+
+    printNameMol(pse,f_out) # fetch toutes les molécules 
 
     for molecule in name: # molecule peut être une molecule ou une selection
         if molecule!=name[0] and molecule!=[]: #name[0]==None []== sélection vide
@@ -54,25 +57,25 @@ def pymolToUnityMol(psefile, pymolColors, umolfile):
                         listeAtom.sort()    
                         strParRepre=optimisationSele(listeAtom, molecule[0]) # sélection optimisée, molecule[0] == nom de la molécule    
                         nbSele+=1
-                        print("select('"+str(strParRepre[:-4])+"', '"+molecule[0]+"_"+str(nbSele)+"')") #afficher les sélections par représentation
+                        print("select('"+str(strParRepre[:-4])+"', '"+molecule[0]+"_"+str(nbSele)+"')", file=f_out) #afficher les sélections par représentation
                         for k in representation(i):    # en cas de superposition de représentations ou Licorice ou Wire            
                             if k!="":
                                 repre=matchingRepre[k]                                
                                 if repre=="Licorice" or repre=="VdW" or repre=="Balls&Sticks":
-                                    print("showSelection('"+molecule[0]+"_"+str(nbSele)+"', 'hb')")
-                                    print("cols"+str(nbSele)+"=List[Color](["+cols[0:-2]+"])")
-                                    print("colorSelection('"+molecule[0]+"_"+str(nbSele)+"', 'hb', cols"+str(nbSele)+")")
-                                    print("setHyperBallMetaphore('"+molecule[0]+"_"+str(nbSele)+"', '"+repre+"')")
+                                    print("showSelection('"+molecule[0]+"_"+str(nbSele)+"', 'hb')", file=f_out)
+                                    print("cols"+str(nbSele)+"=List[Color](["+cols[0:-2]+"])", file=f_out)
+                                    print("colorSelection('"+molecule[0]+"_"+str(nbSele)+"', 'hb', cols"+str(nbSele)+")", file=f_out)
+                                    print("setHyperBallMetaphore('"+molecule[0]+"_"+str(nbSele)+"', '"+repre+"')", file=f_out)
                                 elif repre=="wireframe":
-                                    print("showSelection('"+molecule[0]+"_"+str(nbSele)+"', 's')")
-                                    print("cols"+str(nbSele)+"=List[Color](["+cols[0:-2]+"])")
-                                    print("colorSelection('"+molecule[0]+"_"+str(nbSele)+"', 's', cols"+str(nbSele)+")")
-                                    print("setWireframeSurface('"+molecule[0]+"_"+str(nbSele)+"')")
+                                    print("showSelection('"+molecule[0]+"_"+str(nbSele)+"', 's')", file=f_out)
+                                    print("cols"+str(nbSele)+"=List[Color](["+cols[0:-2]+"])", file=f_out)
+                                    print("colorSelection('"+molecule[0]+"_"+str(nbSele)+"', 's', cols"+str(nbSele)+")", file=f_out)
+                                    print("setWireframeSurface('"+molecule[0]+"_"+str(nbSele)+"')", file=f_out)
 
                                 else:
-                                    print("showSelection('"+molecule[0]+"_"+str(nbSele)+"', '"+repre+"')")
-                                    print("cols"+str(nbSele)+"=List[Color](["+cols[0:-2]+"])")
-                                    print("colorSelection('"+molecule[0]+"_"+str(nbSele)+"', '"+repre+"', cols"+str(nbSele)+")")
+                                    print("showSelection('"+molecule[0]+"_"+str(nbSele)+"', '"+repre+"')", file=f_out)
+                                    print("cols"+str(nbSele)+"=List[Color](["+cols[0:-2]+"])", file=f_out)
+                                    print("colorSelection('"+molecule[0]+"_"+str(nbSele)+"', '"+repre+"', cols"+str(nbSele)+")", file=f_out)
                         listeAtom=[]
                         strParRepre =""
                         cols=""
@@ -90,15 +93,17 @@ def pymolToUnityMol(psefile, pymolColors, umolfile):
                 stock.append(strSele)
             strSele    =""
     for m in stock:
-        print("select('"+m+"')")
-    print("clearSelections()")
+        print("select('"+m+"')", file=f_out)
+    print("clearSelections()", file=f_out)
 
-def printNameMol(pse): #affiche toutes les molécules présentes dans le fichier
+    f_out.close()
+
+def printNameMol(pse, f_out): #affiche toutes les molécules présentes dans le fichier
     name=pse['names'] 
     for mol in name: 
         if mol!=name[0] and mol!=[]: 
             if  mol[5]!= []and type(mol[5][0][0])==int: 
-                print("fetch('"+mol[0]+"', showDefaultRep=False)") 
+                print("fetch('"+mol[0]+"', showDefaultRep=False)", file=f_out) 
 
 def moleculeRepre(mol): #renvoie la liste de toutes les représentations (chifrées) d'une molécule
     listeRepre=[]
