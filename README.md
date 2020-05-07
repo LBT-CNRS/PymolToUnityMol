@@ -10,7 +10,7 @@ Convert pymol session file (.pse) to UnityMol commands
 ## How to run
 
 ```bash
-$ python2 pymolToUMol.py myPymolSession.pse > myUMolSession.py
+$ python2 pymolToUMol.py -f myPymolSession.pse -o myUMolSession.py
 ```
 
 Then import the ```myUMolSession.py``` file in UnityMol.
