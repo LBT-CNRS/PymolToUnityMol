@@ -116,12 +116,12 @@ def printNameMol(pse, f_out):
                 print("fetch('" + mol[0] + "', showDefaultRep=False)", file=f_out)
 
 
-def moleculeRepre(mol):
+def moleculeRepre(atoms):
     """
     Return the list of all representations of one molecule
     """
     listeRepre = []
-    for atom in mol:
+    for atom in atoms:
         if atom[20] not in listeRepre:
             listeRepre.append(atom[20])
     return listeRepre
