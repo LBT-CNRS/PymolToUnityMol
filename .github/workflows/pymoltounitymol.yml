@@ -1,0 +1,25 @@
+name: PymolToUnityMol
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 2.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 2.7
+    - name: Install Pymol
+      run: |
+        sudo apt install pymol
+
+    - name: Test with pytest
+      run: |
+        # Use python from OS not from GitHub because Pymol use the OS one to install its libraries.
+        /usr/bin/python2.7 -m pip install --upgrade pip
+        /usr/bin/python2.7 -m pip install pytest
+        /usr/bin/python2.7 -m pytest
