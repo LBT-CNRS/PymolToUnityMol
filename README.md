@@ -21,6 +21,15 @@ You should see the same representations (if they exist in UnityMol) with the sam
 
 - For now, this only works for files fetched from the PDB.
 
+## Tests
+
+A few tests have been written in the 'tests' folder with `pytest`.
+You can launch them with this command:
+
+```bash
+$ python2 -m pytest
+```
+
 ## Contribute
 
 Pull requests are more than welcome !
