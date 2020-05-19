@@ -11,7 +11,7 @@ import pytest
 import pymol
 import pickle
 
-import pymolToUMol
+from PymolToUnityMol import pymolToUMol
 
 PSE_FILE="tests/1kx2_HemeVDW_surface.pse"
 

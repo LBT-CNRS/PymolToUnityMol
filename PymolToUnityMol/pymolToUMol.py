@@ -229,9 +229,17 @@ def define_options(argv):
     return args
 
 
-if __name__ == "__main__":
+def main():
+    """
+    PymolToUMol command line
+    """
+
     #Command line parsing
     args = define_options(sys.argv[1:])
 
     pycolors = pymolColors.dicColor()
     pymolToUnityMol(args.filin, pycolors, args.filout)
+
+
+if __name__ == "__main__":
+    main()
