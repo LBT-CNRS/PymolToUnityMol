@@ -1,0 +1,41 @@
+{
+  "@context": "https://w3id.org/codemeta/3.0",
+  "type": "SoftwareSourceCode",
+  "name": "PymolToUnityMol",
+  "description": "Convert pymol session file (.pse) to UnityMol commands",
+  "codeRepository": "https://github.com/LBT-CNRS/PymolToUnityMol",
+  "license": "https://spdx.org/licenses/Apache-2.0.html",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Amélys",
+      "familyName": "Debiol",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Laboratoire de biochimie théorique [Paris]"
+      }
+    },
+    {
+      "@type": "Person",
+      "givenName": "Xavier",
+      "familyName": "Martinez",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Laboratoire de biochimie théorique [Paris]"
+      }
+    },
+    {
+      "@type": "Person",
+      "givenName": "Hubert",
+      "familyName": "Santuz",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Laboratoire de biochimie théorique [Paris]"
+      }
+    }
+  ],
+  "programmingLanguage": [
+    "Python"
+  ],
+  "keywords": []
+}
